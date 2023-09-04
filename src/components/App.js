@@ -19,10 +19,10 @@ function App() {
         <div className="col-md-12 d-flex justify-content-center">
           <form name="Cal">
             
-            <TotalDisplay value={0}/>
+            <TotalDisplay value={calculatorValue.total}/>
             <div className="row details">
-              <span id="operation"><b>Operation:</b> X</span>
-              <span id="memory"><b>Memory:</b> 0</span>
+              <span id="operation"><b>Operation:</b>{calculatorValue.operation}</span>
+              <span id="memory"><b>Memory:</b>{calculatorValue.memory}</span>
             </div>
             
             <div className="row">
