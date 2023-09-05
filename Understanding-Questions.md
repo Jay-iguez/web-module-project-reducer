@@ -7,7 +7,7 @@ When a user clicks on '1'...
 
 1. It's onClick is then invoked which passes it's synthetic event object to 'eventHandler' found in AppJS, which is the function that was passed as the 'onClick' for '1'.
 
-2. Within 'eventHandler', it invokes the dispatch function or in my code's case 'calculatorValueDispatch' - which then invokes 'addOne' inside of itself.
+2. Within 'eventHandler', it invokes the dispatch function or in my code's case 'calculatorValueDispatch' - which then as a result of being called inside of it, 'addOne' is then called or invoked.
 
 3. Within 'addOne', it returns an action object with the type 'ACTIONS.ADD_ONE' but no payload. This inturn becomes the argument sent to the dispatch function 'calculatorValueDispatch'
 
