@@ -2,7 +2,9 @@ export const ACTIONS = {
     ADD_ONE: 'add one',
     APPLY_NUMBER: 'apply number',
     CHANGE_OPERATION: 'change operator',
-    CLEAR_DISPLAY: 'clear display'
+    CLEAR_DISPLAY: 'clear display',
+    SET_MEMORY: 'set memory',
+    CLEAR_MEMORY: 'clear memory'
 }
 
 export const addOne = () => {
@@ -19,6 +21,14 @@ export const changeOperator = (operator) => {
 
 export const clearDisplay = () => {
     return ({type:ACTIONS.CLEAR_DISPLAY})
+}
+
+export const setMemory = () => {
+    return ({type:ACTIONS.SET_MEMORY})
+}
+
+export const clearMemory = () => {
+    return ({type:ACTIONS.CLEAR_MEMORY})
 }
 
 export default {
