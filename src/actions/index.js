@@ -1,7 +1,8 @@
 export const ACTIONS = {
     ADD_ONE: 'add one',
     APPLY_NUMBER: 'apply number',
-    CHANGE_OPERATION: 'change operator'
+    CHANGE_OPERATION: 'change operator',
+    CLEAR_DISPLAY: 'clear display'
 }
 
 export const addOne = () => {
@@ -14,6 +15,10 @@ export const applyNumber = (number) => {
 
 export const changeOperator = (operator) => {
     return ({type:ACTIONS.CHANGE_OPERATION, payload:operator})
+}
+
+export const clearDisplay = () => {
+    return ({type:ACTIONS.CLEAR_DISPLAY})
 }
 
 export default {

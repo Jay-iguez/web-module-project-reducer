@@ -36,7 +36,8 @@ export const reducer = (state, action) => {
                 ...state,
                 operation: action.payload
             });
-            
+        case ACTIONS.CLEAR_DISPLAY:
+            return initialState
         default:
             return state;
     }
