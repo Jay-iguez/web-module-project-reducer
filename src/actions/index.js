@@ -12,6 +12,10 @@ export const applyNumber = (number) => {
     return({type:ACTIONS.APPLY_NUMBER, payload:number});
 }
 
+export const changeOperator = (operator) => {
+    return ({type:ACTIONS.CHANGE_OPERATION, payload:operator})
+}
+
 export default {
     ACTIONS, addOne, applyNumber
 }

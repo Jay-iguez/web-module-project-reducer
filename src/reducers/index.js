@@ -31,7 +31,7 @@ export const reducer = (state, action) => {
                 total: calculateResult(state.total, action.payload, state.operation)
             });
         
-        case(ACTIONS.CHANGE_OPERATOR):
+        case(ACTIONS.CHANGE_OPERATION):
             return ({
                 ...state,
                 operation: action.payload
