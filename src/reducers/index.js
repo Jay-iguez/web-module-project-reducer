@@ -3,7 +3,8 @@ import {ACTIONS} from '../actions/index'
 export const initialState = {
     total: 0,
     operation: "+",
-    memory: 0
+    memory: 0,
+    digits: ''
 }
 
 const calculateResult = (num1, num2, operation) => {
@@ -30,7 +31,16 @@ export const reducer = (state, action) => {
                 ...state, 
                 total: calculateResult(state.total, action.payload, state.operation)
             });
-        
+        case ACTIONS.SELECT_DIGITS:
+            return {
+                ...state,
+                digits: state.digits + action.payload
+            }
+        case ACTIONS.CLEAR_DIGITS:
+            return {
+                ...state,
+                digits: initialState.digits
+            }
         case(ACTIONS.CHANGE_OPERATION):
             return ({
                 ...state,
@@ -41,7 +51,12 @@ export const reducer = (state, action) => {
         case ACTIONS.SET_MEMORY:
             return ({
                 ...state,
-                memory: state.total
+                memory: state.digits === '' ? state.total : parseInt(state.digits)
+            })
+        case ACTIONS.CLEAR_TOTAL:
+            return ({
+                ...state,
+                total : initialState.total
             })
         case ACTIONS.CLEAR_MEMORY:
             return ({

@@ -5,25 +5,43 @@ import './App.css';
 import TotalDisplay from './TotalDisplay';
 import CalcButton from './CalcButton';
 import {reducer, initialState} from '../reducers/index'
-import {applyNumber, changeOperator, clearDisplay, setMemory, clearMemory} from '../actions/index'
+import {applyNumber, changeOperator, clearDisplay, setMemory, clearMemory, selectDigits, clearDigits} from '../actions/index'
 
 function App() {
   const [calculatorValue, calculatorValueDispatch] = useReducer(reducer, initialState)
 
-  const eventHandler = (num) => {
-    calculatorValueDispatch(applyNumber(num)) 
+  const applyHandler = (num) => {
+    calculatorValueDispatch(selectDigits(String(num)))
+  }
+
+  const equalHandler = () => {
+    calculatorValueDispatch(applyNumber(parseInt(calculatorValue.digits === '' ? 0 : calculatorValue.digits)))
+    calculatorValueDispatch(clearDigits())
   }
 
   const operatorHandler = (operator) => {
-    calculatorValueDispatch(changeOperator(operator))
+    
+    if (calculatorValue.digits === ''){
+      calculatorValueDispatch(changeOperator(operator))
+    } else {
+      calculatorValueDispatch(applyNumber(parseInt(calculatorValue.digits)))
+      calculatorValueDispatch(clearDigits())
+      calculatorValueDispatch(changeOperator(operator))
+    }
   }
 
-  const clearHandler = () => {
+  const mrHandler = () => {
+    calculatorValueDispatch(applyNumber(calculatorValue.memory))
+    calculatorValueDispatch(clearDigits())
+  }
+
+  const clearAllHandler = () => {
     calculatorValueDispatch(clearDisplay())
   }
 
   const memoryHandler = () => {
     calculatorValueDispatch(setMemory())
+    calculatorValueDispatch(clearDigits())
   }
 
   const clearMemoryHandler = () => {
@@ -40,7 +58,7 @@ function App() {
         <div className="col-md-12 d-flex justify-content-center">
           <form name="Cal">
             
-            <TotalDisplay value={calculatorValue.total}/>
+            <TotalDisplay value={calculatorValue.digits === '' ? calculatorValue.total : calculatorValue.digits}/>
             <div className="row details">
               <span id="operation"><b>Operation:</b>{calculatorValue.operation}</span>
               <span id="memory"><b>Memory:</b>{calculatorValue.memory}</span>
@@ -48,26 +66,26 @@ function App() {
             
             <div className="row">
               <CalcButton value={"M+"} onClick={memoryHandler}/>
-              <CalcButton value={"MR"} onClick={() => eventHandler(calculatorValue.memory)}/>
+              <CalcButton value={"MR"} onClick={mrHandler}/>
               <CalcButton value={"MC"} onClick={clearMemoryHandler}/>
             </div>
 
             <div className="row">
-              <CalcButton value={1} onClick={eventHandler}/>
-              <CalcButton value={2} onClick={eventHandler}/>
-              <CalcButton value={3} onClick={eventHandler}/>
+              <CalcButton value={1} onClick={applyHandler}/>
+              <CalcButton value={2} onClick={applyHandler}/>
+              <CalcButton value={3} onClick={applyHandler}/>
             </div>
 
             <div className="row">
-              <CalcButton value={4} onClick={eventHandler}/>
-              <CalcButton value={5} onClick={eventHandler}/>
-              <CalcButton value={6} onClick={eventHandler}/>
+              <CalcButton value={4} onClick={applyHandler}/>
+              <CalcButton value={5} onClick={applyHandler}/>
+              <CalcButton value={6} onClick={applyHandler}/>
             </div>
 
             <div className="row">
-              <CalcButton value={7} onClick={eventHandler}/>
-              <CalcButton value={8} onClick={eventHandler}/>
-              <CalcButton value={9} onClick={eventHandler}/>
+              <CalcButton value={7} onClick={applyHandler}/>
+              <CalcButton value={8} onClick={applyHandler}/>
+              <CalcButton value={9} onClick={applyHandler}/>
             </div>
 
             <div className="row">
@@ -77,7 +95,8 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"} onClick={clearHandler}/>
+              <CalcButton value={"="} onClick={equalHandler}/>
+              <CalcButton value={"CE"} onClick={clearAllHandler}/>
             </div>
 
           </form>

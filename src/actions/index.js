@@ -4,7 +4,10 @@ export const ACTIONS = {
     CHANGE_OPERATION: 'change operator',
     CLEAR_DISPLAY: 'clear display',
     SET_MEMORY: 'set memory',
-    CLEAR_MEMORY: 'clear memory'
+    CLEAR_MEMORY: 'clear memory',
+    SELECT_DIGITS: 'select digits',
+    CLEAR_DIGITS: 'clear digits',
+    CLEAR_TOTAL: 'clear total'
 }
 
 export const addOne = () => {
@@ -23,6 +26,10 @@ export const clearDisplay = () => {
     return ({type:ACTIONS.CLEAR_DISPLAY})
 }
 
+export const clearTotal = () => {
+    return ({type:ACTIONS.CLEAR_TOTAL})
+}
+
 export const setMemory = () => {
     return ({type:ACTIONS.SET_MEMORY})
 }
@@ -31,6 +38,14 @@ export const clearMemory = () => {
     return ({type:ACTIONS.CLEAR_MEMORY})
 }
 
+export const selectDigits = (digit) => {
+    return ({type:ACTIONS.SELECT_DIGITS, payload:digit})
+}
+
+export const clearDigits = () => {
+    return ({type:ACTIONS.CLEAR_DIGITS})
+}
+
 export default {
-    ACTIONS, addOne, applyNumber
+    ACTIONS, addOne, applyNumber, changeOperator, clearDisplay, setMemory, clearMemory, selectDigits, clearDigits, clearTotal
 }
